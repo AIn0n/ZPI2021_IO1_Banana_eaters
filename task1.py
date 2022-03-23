@@ -4,6 +4,9 @@ print("Developer Panzer0")
 print("GROMoOS")
 print("209424")
 
+def multiply(A: float, B: float):
+    return A * B
+
 def Addition(A, B):
     return A + B
 
