@@ -1,1 +1,2 @@
-print("BananaEaters\n Developer Panzer0")
+print("BananaEaters\n SCRUM Master SzymonGoldberg")
+print("Developer Panzer0")
