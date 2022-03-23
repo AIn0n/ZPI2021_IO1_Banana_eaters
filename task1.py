@@ -5,7 +5,7 @@ print("GROMoOS")
 print("209424")
 
 
-def Division(A, B):
-    if B == 0:
-        return "Illegal operation"
-    return A / B
+def division(a, b):
+    if b == 0:
+        raise ValueError("Illegal operation")
+    return a / b
