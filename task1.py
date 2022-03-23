@@ -5,5 +5,5 @@ print("GROMoOS")
 print("209424")
 
 
-def difference(a, b):
-    return a-b
+def difference(a: float, b: float) -> float:
+    return a - b
