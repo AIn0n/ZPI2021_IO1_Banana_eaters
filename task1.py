@@ -5,6 +5,7 @@ print("GROMoOS")
 print("209424")
 
 
+# Comment 1
 def difference(a: float, b: float) -> float:
     return a - b
 
