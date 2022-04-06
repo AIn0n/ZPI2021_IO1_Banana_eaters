@@ -11,8 +11,6 @@ def difference(a: float, b: float) -> float:
 def multiply(A: float, B: float):
     return A * B
 
-# TESTCOMMENT
-
 # Returns the sum of A and B
 def Addition(A, B):
     return A + B        # Sum of A and B
