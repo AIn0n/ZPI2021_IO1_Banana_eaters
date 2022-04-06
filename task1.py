@@ -17,6 +17,7 @@ def multiply(A: float, B: float):
 def Addition(A, B):
     return A + B
 
+# This is a feature
 def division(a, b):
     if b == 0:
         raise ValueError("Illegal operation")
