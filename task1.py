@@ -8,10 +8,8 @@ print("209424")
 def difference(a: float, b: float) -> float:
     return a - b
 
-
-# Returns a * b
-def multiply(a: float, b: float) -> float:
-    return a * b
+def multiply(A: float, B: float):
+    return A * B
 
 def Addition(A, B):
     return A + B
