@@ -1,6 +1,6 @@
 print("BananaEaters\n SCRUM Master SzymonGoldberg")
 print("Developer Vermilion")
-print("Developer Panzer0")
+print("Developer Panzer0")      # Cool guy
 print("GROMoOS")
 print("209424")
 
@@ -11,7 +11,6 @@ def difference(a: float, b: float) -> float:
 def multiply(A: float, B: float):
     return A * B
 
-# Returns the sum of A and B
 def Addition(A, B):
     return A + B
 
