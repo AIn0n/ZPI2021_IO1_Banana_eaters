@@ -12,7 +12,7 @@ def multiply(A: float, B: float):
     return A * B
 
 def Addition(A, B):
-    return A + B
+    return A + B        # Sum of A and B
 
 def division(a, b):
     if b == 0:
