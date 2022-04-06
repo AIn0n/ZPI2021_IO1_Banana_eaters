@@ -5,13 +5,13 @@ print("GROMoOS")
 print("209424")
 
 
-# Comment 3
 def difference(a: float, b: float) -> float:
     return a - b
 
 def multiply(A: float, B: float):
     return A * B
 
+# Comment 3
 def Addition(A, B):
     return A + B
 
