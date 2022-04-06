@@ -19,4 +19,4 @@ def division(a, b):
         raise ValueError("Illegal operation")
     return a / b
 
-# komentarz 1
+# komentarz 2
