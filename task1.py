@@ -18,3 +18,5 @@ def division(a, b):
     if b == 0:
         raise ValueError("Illegal operation")
     return a / b
+
+# komentarz 1
