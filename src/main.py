@@ -2,7 +2,7 @@ import requests
 from datetime import date
 
 def date_to_iso8601(input_date: date) -> str:
-  return ""
+  return input_date.isoformat()
 
 headers = {
   "Accept": "application/json"
