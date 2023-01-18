@@ -3,3 +3,4 @@ test:
 
 precommit:
 	python3 -m black *
+	pip freeze > requirements.txt
