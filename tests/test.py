@@ -26,4 +26,10 @@ class TestApp(unittest.TestCase):
             currency = random.choice(get_all_currencies_codes(data))
             hist = count_tendency_hist(data, currency)
             self.assertEqual(sum(len(val) for key, val in hist.items()), 12)
-                
+
+    def test_get_rates_should_return_twenty_non_negative_float(self):
+        with open(TEST_JSON, "rt") as file:
+            data = json.load(file)
+            currency = random.choice(get_all_currencies_codes(data))
+            rates = get_rates(data, currency)
+            self.assertEqual(len(rates), 12)
