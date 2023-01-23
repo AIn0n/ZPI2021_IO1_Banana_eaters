@@ -19,3 +19,11 @@ class TestApp(unittest.TestCase):
             hist = count_tendency_hist(data, currency)
             for elem in ("increase", "same", "decrease"):
                 self.assertTrue(elem in hist.keys())
+
+    def test_count_hist_should_sum_to_twenty(self):
+        with open(TEST_JSON, "rt") as file:
+            data = json.load(file)
+            currency = random.choice(get_all_currencies_codes(data))
+            hist = count_tendency_hist(data, currency)
+            self.assertEqual(sum(len(val) for key, val in hist.items()), 12)
+                

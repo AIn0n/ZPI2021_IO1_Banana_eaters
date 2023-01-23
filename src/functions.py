@@ -14,4 +14,6 @@ def get_all_currencies_codes(data: dict)-> list:
     return list(map(lambda x: x["code"],data[0]["rates"]))
 
 def count_tendency_hist(data: dict, currency: str) -> dict:
-    pass
+    prev = data[0]
+    for elem in data[1:]:
+        pass
