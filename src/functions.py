@@ -21,6 +21,15 @@ def get_rates(data: dict, currency: str) -> list[float]:
 
 
 def count_tendency_hist(data: dict, currency: str) -> dict:
-    prev = data[0]
-    for elem in data[1:]:
-        pass
+    rates: list = get_rates(data, currency)
+    prev: float = rates[0]
+    result: dict = {"increase": 0, "same": 0, "decrease": 0}
+    for rate in rates[1:]:
+        if rate > prev:
+            result["increase"] += 1
+        elif rate == prev:
+            result["same"] += 1
+        else:
+            result["decrease"] += 1
+        prev = rate
+    return result
