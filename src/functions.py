@@ -17,7 +17,9 @@ def get_all_currencies_codes(data: dict) -> list:
 
 def get_rates(data: dict, currency: str, days: int) -> list[float]:
     rates = [x["rates"] for x in data]
-    result = reversed([list(filter(lambda x: x["code"] == currency, r))[0]["mid"] for r in rates])
+    result = reversed(
+        [list(filter(lambda x: x["code"] == currency, r))[0]["mid"] for r in rates]
+    )
     return list(result)[:days]
 
 
