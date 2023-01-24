@@ -10,7 +10,7 @@ def test_loading_data():
         return json.load(file)
 
 
-st.title("exchange rates")
+st.title(":currency_exchange: exchange rates app")
 
 # this part of code is related to loading data from API
 data_load_state = st.text("loading data")
@@ -19,9 +19,10 @@ data_load_state.text("data successfully fetched from API")
 
 currencies = get_all_currencies_codes(data)
 selected = st.selectbox("select currency", currencies)
+
 if selected != None:
     # get days period
-    st.subheader("Histogram of changes")
+    st.subheader(":bar_chart: Histogram of changes")
     hist_time_dict = {"week": 7, "two weeks": 14, "month": 30, "quarter": 90}
     selected_time = st.selectbox("select time period", hist_time_dict.keys())
 
