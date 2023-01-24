@@ -1,5 +1,5 @@
 import streamlit as st
-import json
+import json, statistics
 import plotly.express as px
 import pandas as pd
 from functions import *
@@ -20,14 +20,28 @@ data_load_state.text("data successfully fetched from API")
 currencies = get_all_currencies_codes(data)
 selected = st.selectbox("select currency", currencies)
 
-if selected != None:
-    # get days period
-    st.subheader(":bar_chart: Histogram of changes")
-    hist_time_dict = {"week": 7, "two weeks": 14, "month": 30, "quarter": 90}
-    selected_time = st.selectbox("select time period", hist_time_dict.keys())
+# get days period
+st.subheader(":bar_chart: Histogram of changes")
+hist_time_dict = {"week": 7, "two weeks": 14, "month": 30, "quarter": 90}
+selected_time = st.selectbox("select time period", hist_time_dict.keys())
 
-    # prepare data and add chart
-    collection = count_tendency_hist(data, selected, hist_time_dict[selected_time])
-    df = pd.DataFrame.from_dict(collection, orient="index", columns=["number of days"])
-    fig = px.bar(df, x=df.index, y="number of days")
-    st.plotly_chart(fig)
+# prepare data and add chart
+collection = count_tendency_hist(data, selected, hist_time_dict[selected_time])
+df = pd.DataFrame.from_dict(collection, orient="index", columns=["number of days"])
+fig = px.bar(df, x=df.index, y="number of days")
+st.plotly_chart(fig)
+
+st.subheader(":clipboard: statistics table")
+
+rates = get_rates(data, selected, hist_time_dict[selected_time])
+mean = statistics.mean(rates)
+stdev = statistics.stdev(rates)
+stats = [
+    ["average", mean],
+    ["median", statistics.median(rates)],
+    ["standard deviation", stdev],
+    ["coefficient of variation", stdev / mean * 100],
+]
+
+stats_df = pd.DataFrame(stats, columns=["function", "value"])
+st.table(stats_df)
