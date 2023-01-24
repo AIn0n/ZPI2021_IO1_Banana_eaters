@@ -3,7 +3,7 @@ from datetime import date
 from src.functions import *
 
 TEST_JSON = "tests/2022-12-31-to-2023-01-18.json"
-
+test_days_range = range(1, 12)
 
 class TestApp(unittest.TestCase):
     def setUp(self):
@@ -17,28 +17,37 @@ class TestApp(unittest.TestCase):
     def test_load_config(self):
         self.assertEqual("http://api.nbp.pl/api", load_config("src/config.json")["URL"])
 
-    def test_count_tendency_hist_should_return_three_categories(self):
+    def test_count_tendency_hist_returns_three_categories(self):
         currency = random.choice(get_all_currencies_codes(self.data))
-        hist = count_tendency_hist(self.data, currency)
+        n = random.choice(test_days_range)
+        hist = count_tendency_hist(self.data, currency, n)
         for elem in ("increase", "same", "decrease"):
             self.assertTrue(elem in hist.keys())
 
-    def test_count_hist_should_sum_to_eleven(self):
+    def test_count_hist_sums_to_n(self):
         currency = random.choice(get_all_currencies_codes(self.data))
-        hist = count_tendency_hist(self.data, currency)
-        self.assertEqual(sum(val for _, val in hist.items()), 11)
+        n = random.choice(test_days_range)
+        hist = count_tendency_hist(self.data, currency, n)
+        self.assertEqual(sum(val for _, val in hist.items()), n - 1)
 
-    def test_get_rates_should_return_twenty_non_negative_float(self):
+    def test_get_rates_returns_N_non_negative_float(self):
         currency = random.choice(get_all_currencies_codes(self.data))
-        rates = get_rates(self.data, currency)
-        self.assertEqual(len(rates), 12)
+        n = random.choice(test_days_range)
+        rates = get_rates(self.data, currency, n)
+        self.assertEqual(len(rates), n)
         for elem in rates:
             self.assertGreater(elem, 0.0)
 
-    def test_get_rates_two_different_currencies_should_have_different_courses(self):
+    def test_get_rates_two_different_currencies_have_different_courses(self):
         currencies = random.choices(get_all_currencies_codes(self.data), k=2)
-        r1, r2 = [get_rates(self.data, currency) for currency in currencies]
+        n = random.choice(test_days_range)
+        r1, r2 = [get_rates(self.data, currency, n) for currency in currencies]
         self.assertNotEqual(r1, r2)
+
+    def test_count_tendency_hist_given_zero_days_return_empty_dict(self):
+        currency = random.choice(get_all_currencies_codes(self.data))
+        hist = count_tendency_hist(self.data, currency, 0)
+        self.assertEqual(hist, {})
 
 
 if __name__ == "__main__":

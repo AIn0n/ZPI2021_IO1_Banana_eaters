@@ -15,13 +15,16 @@ def get_all_currencies_codes(data: dict) -> list:
     return list(map(lambda x: x["code"], data[0]["rates"]))
 
 
-def get_rates(data: dict, currency: str) -> list[float]:
+def get_rates(data: dict, currency: str, days: int) -> list[float]:
     rates = [x["rates"] for x in data]
-    return [list(filter(lambda x: x["code"] == currency, r))[0]["mid"] for r in rates]
+    result = reversed([list(filter(lambda x: x["code"] == currency, r))[0]["mid"] for r in rates])
+    return list(result)[:days]
 
 
-def count_tendency_hist(data: dict, currency: str) -> dict:
-    rates: list = get_rates(data, currency)
+def count_tendency_hist(data: dict, currency: str, days: int) -> dict:
+    if days < 1:
+        return {}
+    rates: list = get_rates(data, currency, days)
     prev: float = rates[0]
     result: dict = {"increase": 0, "same": 0, "decrease": 0}
     for rate in rates[1:]:
