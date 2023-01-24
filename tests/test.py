@@ -5,6 +5,7 @@ from src.functions import *
 TEST_JSON = "tests/2022-12-31-to-2023-01-18.json"
 test_days_range = range(1, 12)
 
+
 class TestApp(unittest.TestCase):
     def setUp(self):
         with open(TEST_JSON, "rt") as file:
