@@ -18,5 +18,4 @@ jobs:
           architecture: 'x64'
       # You can test your matrix by printing the current Python version
       - name: make
-        run:  |
-          src/app.py
+        run:  python3 -m unittest tests/test.py
