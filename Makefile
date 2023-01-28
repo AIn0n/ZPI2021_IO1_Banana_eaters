@@ -4,3 +4,6 @@ test:
 precommit:
 	python3 -m black *
 	pip freeze > requirements.txt
+
+run:
+	streamlit run src/app.py
