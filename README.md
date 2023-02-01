@@ -4,7 +4,7 @@ App prepared for ZPI course at TUL.
 
 ## Team
 
-| position | name | github nick |
+| position | name | github nickname |
 |----------|------|-------------|
 | developer + scrum master| Szymon Górka | [AIn0n](https://github.com/AIn0n) |
 | developer | Daniel Wieczorek | [Panzer0](https://github.com/Panzer0) |
@@ -31,5 +31,5 @@ make run
 We are using github actions as a main place for developing pipeline - mostly for running automated tests before each merge. This give us sanity and insure as that every new commit will not break any existing functionality. You can check the details [here](https://github.com/IIS-ZPI/ZPI2021_IO1_Banana_eaters/actions).
 
 ## MVP
-Functionalities demanded for minimal value product are list in this [file]().
+Functionalities demanded for minimal value product are list in this [file](https://github.com/IIS-ZPI/ZPI2021_IO1_Banana_eaters/blob/readme/technical_requirements.pdf).
 
