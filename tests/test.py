@@ -45,6 +45,10 @@ class TestApp(unittest.TestCase):
         r1, r2 = [get_rates(self.data, currency, n) for currency in currencies]
         self.assertNotEqual(r1, r2)
 
+    def test_get_all_currencies_codes_returns_unique_values(self):
+        currencies = get_all_currencies_codes(self.data)
+        self.assertEqual(len(currencies), len(set(currencies)))
+
     def test_count_tendency_hist_given_zero_days_return_empty_dict(self):
         currency = random.choice(get_all_currencies_codes(self.data))
         hist = count_tendency_hist(self.data, currency, 0)
