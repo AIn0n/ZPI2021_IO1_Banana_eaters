@@ -24,7 +24,10 @@ def get_rates(data: dict, currency: str, days: int) -> list[float]:
 
 
 def get_diff_between_each_item(l: list) -> list:
-    return (len(l) - 1) * [2.0]
+    results = []
+    for i in range(0, len(l) - 1):
+        results.append(l[i] - l[i + 1])
+    return results
 
 
 def count_tendency_hist(data: dict, currency: str, days: int) -> dict:

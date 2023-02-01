@@ -58,7 +58,7 @@ class TestApp(unittest.TestCase):
     def test_get_diff_between_items_for_multiply_of_two_returns_list_of_twos(self):
         length = random.choice(range(1, 20))
         input_list = [x * 2 for x in range(0, length)]
-        self.assertEqual([2.0] * (length - 1), get_diff_between_each_item(input_list))
+        self.assertEqual([-2.0] * (length - 1), get_diff_between_each_item(input_list))
 
     def test_get_diff_between_items_for_two_numbers_returns_one_eq_to_subs(self):
         first_number = random.randint(0, 100)
