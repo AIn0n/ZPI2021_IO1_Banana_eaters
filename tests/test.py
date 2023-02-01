@@ -50,6 +50,11 @@ class TestApp(unittest.TestCase):
         hist = count_tendency_hist(self.data, currency, 0)
         self.assertEqual(hist, {})
 
+    def test_get_diff_between_items_returns_n_minus_one_list_for_n_input(self):
+        n = random.choice(range(1, 100))
+        input_list = [0.0] * n
+        self.assertEqual(n - 1, len(get_diff_between_each_item(input_list)))
+
 
 if __name__ == "__main__":
     unittest.main()

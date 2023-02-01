@@ -23,6 +23,10 @@ def get_rates(data: dict, currency: str, days: int) -> list[float]:
     return list(result)[:days]
 
 
+def get_diff_between_each_item(l: list) -> list:
+    pass
+
+
 def count_tendency_hist(data: dict, currency: str, days: int) -> dict:
     if days < 1:
         return {}
