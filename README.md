@@ -11,24 +11,24 @@ App prepared for the ZPI course at TUL.
 | devOps | Adam Tadzik | [VermiIion](https://github.com/VermiIion) |
 | tester | Oskar Schilling | [GROMoOS](https://github.com/GROMoOS) |
 
-## run application
+## Run application
 
-Before you start - please prepare python virtual environment by typing in console:
+Before you start - please prepare a python virtual environment by typing the following in your console:
 ```bash
 python3 -m virtualenv venv
 ```
-And install all dependencies list in requirements.txt file:
+Afterwards, install all dependencies listed in requirements.txt file:
 ```bash
 pip install -r requirements.txt
 ```
-after that you can run application with command:
+Finally, you can run the application with command:
 ```bash
 make run
 ```
 
 ## Technologies
 
-We use streamlit library to create this site. It gives us enough flexibility to prepare all required functionalities without splitting project at classical, three pillars architecture - frontend, backend and database. This makes our development time much faster and codebase easier to maintain, cause everything is written in one language.
+We use streamlit library to create this site. It gives us enough flexibility to prepare all required functionalities without splitting project at the classical, three pillars architecture - frontend, backend and database. This makes our development time much faster and codebase easier to maintain, since everything is written in one language.
 
 ## Dev ops platform
 
