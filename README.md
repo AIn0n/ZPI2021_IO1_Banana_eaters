@@ -26,6 +26,10 @@ after that you can run application with command:
 make run
 ```
 
+## Technologies
+
+We use streamlit library to create this site. It gives us enough flexibility to prepare all required functionalities without splitting project at classical, three pillars architecture - frontend, backend and database. This makes our development time much faster and codebase easier to maintain, cause everything is written in one language.
+
 ## Dev ops platform
 
 We are using github actions as a main place for developing pipeline - mostly for running automated tests before each merge. This give us sanity and insure as that every new commit will not break any existing functionality. You can check the details [here](https://github.com/IIS-ZPI/ZPI2021_IO1_Banana_eaters/actions).
