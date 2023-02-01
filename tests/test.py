@@ -55,6 +55,11 @@ class TestApp(unittest.TestCase):
         input_list = [0.0] * n
         self.assertEqual(n - 1, len(get_diff_between_each_item(input_list)))
 
+    def test_get_diff_between_items_for_multiply_of_two_returns_list_of_twos(self):
+        length = random.choice(range(1, 20))
+        input_list = [x * 2 for x in range(0, length)]
+        self.assertEqual([2.0] * (length - 1), get_diff_between_each_item(input_list))
+
 
 if __name__ == "__main__":
     unittest.main()
