@@ -60,6 +60,12 @@ class TestApp(unittest.TestCase):
         input_list = [x * 2 for x in range(0, length)]
         self.assertEqual([2.0] * (length - 1), get_diff_between_each_item(input_list))
 
+    def test_get_diff_between_items_for_two_numbers_returns_one_eq_to_subs(self):
+        first_number = random.randint(0, 100)
+        second_number = random.randint(0, 100)
+        result = get_diff_between_each_item([first_number, second_number])[0]
+        self.assertEqual(result, first_number - second_number)
+
 
 if __name__ == "__main__":
     unittest.main()
