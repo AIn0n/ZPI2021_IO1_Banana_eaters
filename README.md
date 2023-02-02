@@ -17,10 +17,17 @@ Before you start - please prepare a python virtual environment by typing the fol
 ```bash
 python3 -m virtualenv venv
 ```
+
+Subsequently, turn on the virtual environment with the following command:
+```bash
+source tutorial-env/bin/activate
+```
+
 Afterwards, install all dependencies listed in requirements.txt file:
 ```bash
 pip install -r requirements.txt
 ```
+
 Finally, you can run the application with command:
 ```bash
 make run
