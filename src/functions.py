@@ -48,4 +48,4 @@ def count_tendency_hist(data: dict, currency: str, days: int) -> dict:
 
 
 def prep_data_dist_of_changes(nums: list, steps: int) -> dict:
-    return {}
+    return {n: 0 for n in range(steps)}
