@@ -1,6 +1,7 @@
 import unittest, json, random
 from datetime import date
 from src.functions import *
+import numpy as np
 
 TEST_JSON = "tests/2022-12-31-to-2023-01-18.json"
 test_days_range = range(1, 12)
@@ -71,11 +72,15 @@ class TestApp(unittest.TestCase):
         self.assertEqual(result, first_number - second_number)
 
     def test_prep_data_dist_of_changes_returns_same_amount_of_elements_as_steps(self):
-        numbers_to_check = [1, 2, 3]
-        chart_steps = 3
-        self.assertEqual(
-            len(prep_data_dist_of_changes(numbers_to_check, chart_steps)), chart_steps
-        )
+        numbers = [0.5, 2, 3]
+        steps = 3
+        self.assertEqual(len(prep_data_dist_of_changes(numbers, steps)), steps - 1)
+
+    def test_prep_data_dist_of_changes_returns_one_value_at_each_category(self):
+        numbers = [1, 2, 3.5, 4]
+        steps = 3
+        for value in prep_data_dist_of_changes(numbers, steps).values():
+            self.assertEqual(value, 1)
 
 
 if __name__ == "__main__":
