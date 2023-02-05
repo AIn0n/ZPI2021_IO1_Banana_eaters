@@ -45,3 +45,7 @@ def count_tendency_hist(data: dict, currency: str, days: int) -> dict:
             result["decrease"] += 1
         prev = rate
     return result
+
+
+def prep_data_dist_of_changes(nums: list, steps: int) -> dict:
+    return {}

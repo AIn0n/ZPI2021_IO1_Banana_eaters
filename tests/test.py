@@ -70,6 +70,13 @@ class TestApp(unittest.TestCase):
         result = get_diff_between_each_item([first_number, second_number])[0]
         self.assertEqual(result, first_number - second_number)
 
+    def test_prep_data_dist_of_changes_returns_same_amount_of_elements_as_steps(self):
+        numbers_to_check = [1, 2, 3]
+        chart_steps = 3
+        self.assertEqual(
+            len(prep_data_dist_of_changes(numbers_to_check, chart_steps)), chart_steps
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
