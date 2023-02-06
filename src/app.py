@@ -47,6 +47,7 @@ stats = [
 
 stats_df = pd.DataFrame(stats, columns=["function", "value"])
 stats_df = stats_df.set_index("function").T
+
 stats_df.columns = [
     "average",
     "median",
