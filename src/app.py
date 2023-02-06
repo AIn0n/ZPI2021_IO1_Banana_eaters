@@ -1,8 +1,20 @@
 import streamlit as st
-import json, statistics
+import json, statistics, requests, datetime
 import plotly.express as px
 import pandas as pd
 from functions import *
+
+config = load_config("src/config.json")
+
+
+def gather_data(start_date: datetime.datetime):
+    next_90_days = start_date + datetime.timedelta(days=90)
+    response = requests.get(
+        config["URL"]
+        + f"/exchangerates/tables/A/{date_to_iso8601(start_date)}/{date_to_iso8601(next_90_days)}",
+        headers=config["headers"],
+    )
+    return response.json()
 
 
 def test_loading_data():
@@ -15,11 +27,32 @@ def prep_hist(collection):
     return px.bar(df, x=df.index, y="number of days")
 
 
+def prepare_stats_table(rates):
+    mean = statistics.mean(rates)
+    stdev = statistics.stdev(rates)
+    stats = [
+        ["average", mean],
+        ["median", statistics.median(rates)],
+        ["standard deviation", stdev],
+        ["coefficient of variation", stdev / mean * 100],
+    ]
+    stats_df = pd.DataFrame(stats, columns=["function", "value"])
+    stats_df = stats_df.set_index("function").T
+    stats_df.columns = list(map(lambda x: x[0], stats))
+    return stats_df
+
+
 st.title(":currency_exchange: exchange rates app")
+
+min_date = datetime.date(2002, 1, 2)
+max_date = datetime.datetime.today() - datetime.timedelta(days=90)
+start_date = st.date_input(
+    "Choose starting data", min_date, min_value=min_date, max_value=max_date
+)
 
 # this part of code is related to loading data from API
 data_load_state = st.text("loading data")
-data = test_loading_data()
+data = gather_data(start_date) if config["production"] else test_loading_data()
 data_load_state.text("data successfully fetched from API")
 
 with st.expander("single currency analysis"):
@@ -38,25 +71,7 @@ with st.expander("single currency analysis"):
     st.subheader(":clipboard: statistics table")
 
     rates = get_rates(data, selected, hist_time_dict[selected_time])
-    mean = statistics.mean(rates)
-    stdev = statistics.stdev(rates)
-    stats = [
-        ["average", mean],
-        ["median", statistics.median(rates)],
-        ["standard deviation", stdev],
-        ["coefficient of variation", stdev / mean * 100],
-    ]
-
-    stats_df = pd.DataFrame(stats, columns=["function", "value"])
-    stats_df = stats_df.set_index("function").T
-    stats_df.columns = [
-        "average",
-        "median",
-        "standard deviation",
-        "coefficient of variation",
-    ]
-
-    st.table(stats_df)
+    st.table(prepare_stats_table(rates))
 
 with st.expander("two currencies comparison"):
     left_col, mid_col, right_col = st.columns(3)

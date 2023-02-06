@@ -1,6 +1,7 @@
 {
   "URL": "http://api.nbp.pl/api",
   "start_date": "2002-01-02",
+  "production": true,
   "headers": {
     "Accept": "application/json"
   }
