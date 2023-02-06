@@ -3,7 +3,7 @@ test:
 
 precommit:
 	pip freeze > requirements.txt
-	python3 -m black *.py
+	python3 -m black .
 
 run:
 	streamlit run src/app.py
