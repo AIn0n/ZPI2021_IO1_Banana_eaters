@@ -1,8 +1,20 @@
 import streamlit as st
-import json, statistics
+import json, statistics, requests, datetime
 import plotly.express as px
 import pandas as pd
 from functions import *
+
+config = load_config("src/config.json")
+
+
+def gather_data(start_date: datetime.datetime):
+    next_90_days = start_date + datetime.timedelta(days=90)
+    response = requests.get(
+        config["URL"]
+        + f"/exchangerates/tables/A/{date_to_iso8601(start_date)}/{date_to_iso8601(next_90_days)}",
+        headers=config["headers"],
+    )
+    return response.json()
 
 
 def test_loading_data():
@@ -17,9 +29,15 @@ def prep_hist(collection):
 
 st.title(":currency_exchange: exchange rates app")
 
+min_date = datetime.date(2002, 1, 2)
+max_date = datetime.datetime.today() - datetime.timedelta(days=90)
+start_date = st.date_input(
+    "Choose starting data", min_date, min_value=min_date, max_value=max_date
+)
+
 # this part of code is related to loading data from API
 data_load_state = st.text("loading data")
-data = test_loading_data()
+data = gather_data(start_date) if config["production"] else test_loading_data()
 data_load_state.text("data successfully fetched from API")
 
 with st.expander("single currency analysis"):
