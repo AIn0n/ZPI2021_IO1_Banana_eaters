@@ -10,6 +10,11 @@ def test_loading_data():
         return json.load(file)
 
 
+def prep_hist(collection):
+    df = pd.DataFrame.from_dict(collection, orient="index", columns=["number of days"])
+    return px.bar(df, x=df.index, y="number of days")
+
+
 st.title(":currency_exchange: exchange rates app")
 
 # this part of code is related to loading data from API
@@ -28,9 +33,7 @@ with st.expander("single currency analysis"):
 
     # prepare data and add chart
     collection = count_tendency_hist(data, selected, hist_time_dict[selected_time])
-    df = pd.DataFrame.from_dict(collection, orient="index", columns=["number of days"])
-    fig = px.bar(df, x=df.index, y="number of days")
-    st.plotly_chart(fig)
+    st.plotly_chart(prep_hist(collection))
 
     st.subheader(":clipboard: statistics table")
 
@@ -76,8 +79,4 @@ with st.expander("two currencies comparison"):
         second_rates = get_rates(data, second_curr, comp_time_dict[days])
         diff = [a / b for a, b in zip(first_rates, second_rates)]
         comp = prep_data_dist_of_changes(diff, 9)
-        comp_df = pd.DataFrame.from_dict(
-            comp, orient="index", columns=["number of days"]
-        )
-        comp_fig = px.bar(comp_df, x=comp_df.index, y="number of days")
-        st.plotly_chart(comp_fig)
+        st.plotly_chart(prep_hist(comp))
