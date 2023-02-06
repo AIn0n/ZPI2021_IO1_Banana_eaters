@@ -27,6 +27,21 @@ def prep_hist(collection):
     return px.bar(df, x=df.index, y="number of days")
 
 
+def prepare_stats_table(rates):
+    mean = statistics.mean(rates)
+    stdev = statistics.stdev(rates)
+    stats = [
+        ["average", mean],
+        ["median", statistics.median(rates)],
+        ["standard deviation", stdev],
+        ["coefficient of variation", stdev / mean * 100],
+    ]
+    stats_df = pd.DataFrame(stats, columns=["function", "value"])
+    stats_df = stats_df.set_index("function").T
+    stats_df.columns = list(map(lambda x: x[0], stats))
+    return stats_df
+
+
 st.title(":currency_exchange: exchange rates app")
 
 min_date = datetime.date(2002, 1, 2)
@@ -56,25 +71,7 @@ with st.expander("single currency analysis"):
     st.subheader(":clipboard: statistics table")
 
     rates = get_rates(data, selected, hist_time_dict[selected_time])
-    mean = statistics.mean(rates)
-    stdev = statistics.stdev(rates)
-    stats = [
-        ["average", mean],
-        ["median", statistics.median(rates)],
-        ["standard deviation", stdev],
-        ["coefficient of variation", stdev / mean * 100],
-    ]
-
-    stats_df = pd.DataFrame(stats, columns=["function", "value"])
-    stats_df = stats_df.set_index("function").T
-    stats_df.columns = [
-        "average",
-        "median",
-        "standard deviation",
-        "coefficient of variation",
-    ]
-
-    st.table(stats_df)
+    st.table(prepare_stats_table(rates))
 
 with st.expander("two currencies comparison"):
     left_col, mid_col, right_col = st.columns(3)
