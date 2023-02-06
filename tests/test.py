@@ -3,7 +3,7 @@ from datetime import date
 from src.functions import *
 import numpy as np
 
-TEST_JSON = "tests/2022-12-31-to-2023-01-18.json"
+TEST_JSON = "tests/2022-12-20-to-2023-02-07.json"
 test_days_range = range(1, 12)
 
 
