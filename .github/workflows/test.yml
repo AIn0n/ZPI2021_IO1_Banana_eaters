@@ -20,6 +20,6 @@ jobs:
       - name: install_req
         run: |
               pip install -r requirements.txt
-              pip install -e
+              pip install -e .
       - name: make
         run:  python3 -m unittest tests/test.py
