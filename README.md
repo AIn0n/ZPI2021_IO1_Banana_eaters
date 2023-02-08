@@ -1,6 +1,6 @@
 # Web application - exchange rate app
 
-App prepared for the ZPI course at TUL.
+App prepared for the ZPI course at TUL. Hosted at [streamlit](https://zpi-banana-eaters.streamlit.app/).
 
 ## Team
 
